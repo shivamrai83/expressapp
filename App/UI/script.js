@@ -25,7 +25,7 @@ file.oninput = () => {
         document.querySelector('.ex').innerText = extension;
         button[0].style.visibility = 'inherit';
     }else{
-        document.querySelector('.ex').innerText = 'not supported';
+        document.querySelector('.ex').innerText = 'This file format is not supported';
         button[0].style.visibility = 'hidden';
     }
     document.querySelector('.size').innerText = filesize;
