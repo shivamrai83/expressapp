@@ -19,7 +19,9 @@
   "homepage": "https://github.com/shivamrai83/expressapp#readme",
   "dependencies": {
     "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
     "node": "^19.6.1",
+    "nodemon": "^2.0.21",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {}

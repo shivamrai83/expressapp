@@ -1,4 +1,5 @@
 let file = document.getElementById('upload');
+let uploadButton = document.getElementById('uploadButton');
 let button = document.getElementsByTagName('button');
 let progress = document.querySelector('progress');
 let progress_indicator = document.querySelector('.progress-indicator');
@@ -9,7 +10,6 @@ file.oninput = () => {
     let filename = file.files[0].name;
     let extension = filename.split('.').pop();
     let filesize = file.files[0].size;
-
     if (filesize <= 1000000){
         filesize = (filesize/1000).toFixed(2) + 'kb';
     }
@@ -29,7 +29,8 @@ file.oninput = () => {
         button[0].style.visibility = 'hidden';
     }
     document.querySelector('.size').innerText = filesize;
-    getFile(filename);
+    getFile(filename, file.files[0]);
+    console.log('filter', file.files[0]);
 }
 
 let upload = () => {
@@ -45,16 +46,51 @@ let upload = () => {
     }
 }
 
-function getFile(fileName) {
+function getFile(fileName, file) {
     if(fileName){
         document.querySelector('.pr').style.display = "block";
         load = 0;
         progress.value = 0;
         progress_indicator.innerText = '';
         button[0].onclick = e => {
-            e.preventDefault();
-            button[0].classList.add('active');
-            process = setInterval(upload, 50);
+                e.preventDefault();
+                button[0].classList.add('active');
+                process = setInterval(upload, 10);
+            
         }
     }
 }
+
+document.querySelector('#upload').addEventListener('change', event => {
+    handleImageUpload(event)
+  })
+
+// document.querySelector('#downloadButton').addEventListener('click', () => {
+//     fetch('http://localhost:3000/download', {
+//         method: 'GET',
+//     })
+// .then(data => {
+// // console.log(data)
+// })
+// .catch(error => {
+// console.error(error)
+// })  })
+
+  const handleImageUpload = event => {
+    const files = event.target.files
+    console.log('Shivam', files);
+    const formData = new FormData()
+    formData.append('myFile', files[0])
+  
+    fetch('http://localhost:3000/upload', {
+                method: 'POST',
+                body: formData
+            })
+    .then(data => {
+      console.log(data)
+    })
+    .catch(error => {
+      console.error(error)
+    })
+  }
+  

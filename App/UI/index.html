@@ -7,13 +7,13 @@
 </head>
 <body>
     <section>
-        <form action="" autocomplete="off" enctype="multipart/form-data">
+        <form action="/download" autocomplete="off" enctype="multipart/form-data">
             <p>Upload File</p>
             <div>
-                <input type="file" id="upload" style="display: none;">
+                <input type="file" name="file" id="upload" style="display: none;">
                 <label for="upload">Select File</label>
             </div>
-            <button><span>&#8682; Upload </span><span class="uploading">Uploading....</span>
+            <button id="uploadButton"><span>&#8682; Upload </span><span class="uploading">Uploading....</span>
             </button>
             <div class="pr">
                 <strong>
@@ -23,7 +23,9 @@
                 <progress min="0" max="100" value="0"></progress>
                 <span class="progress-indicator"></span>
             </div>
-            <button><span>&#8681; Download </span></button>
+            <!-- <form action="/download" method="GET"> -->
+            <button type="submit" id="downloadButton"><span>&#8681; Download </span></button>
+            <!-- </form> -->
         </form>
     </section>
     

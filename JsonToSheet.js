@@ -1,12 +1,13 @@
-const reader = require('xlsx')
+// const reader = require('xlsx')
   
-const file = reader.readFile('./Docs/sampledoc.xlsx')
+// const file = reader.readFile('./Docs/sampledoc.xlsx')
   
-let dataToInsert = [{
+let dataToInsert = {
+    Sheet1 : [{
     Name:'Shivam',
     Experience:2,
-    String:'ISE',
-    Percentage: 70
+    Branch:'ISE',
+    Marks: 70
 },
 {
     Name:'Vasu',
@@ -37,11 +38,13 @@ let dataToInsert = [{
     Experience:4,
     Branch:'Sales',
     Marks:80
-}]
+}]}
+
+module.exports = dataToInsert;
   
-const convertedData = reader.utils.json_to_sheet(dataToInsert)
+// const convertedData = reader.utils.json_to_sheet(dataToInsert)
   
-reader.utils.book_append_sheet(file,convertedData,"Sheet2")
+// reader.utils.book_append_sheet(file,convertedData,"Sheet2")
   
 // Writing to our file
-reader.writeFile(file, './Docs/sampledoc1.xlsx');
+// reader.writeFile(file, './Docs/sampledoc1.xlsx');
