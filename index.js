@@ -10,30 +10,24 @@ const PORT = 3000;
 const staticPath = path.join(__dirname, '/App/UI')
 app.use(fileUpload())
 let filePath = "";
+let fileData;
 app.use(express.static(staticPath))
 
-app.post('/upload', (req, res) => {
-        const files = req.files.myFile
-        // console.log("shivam --->", files);
-        filePath = __dirname + '/Docs/' + files.name
-      
-        files.mv(filePath, (error) => {console.log(error)})
-
+app.post('/upload', async (req, res) => {
+    fileData = req.files.myFile
     res.sendStatus(500)
 }
 );
 
 app.get('/download', (req,res) => {
-    // console.log('path*****--->', filePath);
-    // const fileName = filePath.split('/')
-    const file = reader.readFile(filePath);
-    // console.log('filter------>', file);
-    reader.utils.sheet_add_json(file.Sheets["Sheet1"], dataToInsert.Sheet1);
-    reader.writeFile(file, './Docs/sampledoc.xlsx')
+    const file = reader.read(fileData, { type: 'buffer' });
+    console.log('filter------>', file);
+    // reader.utils.sheet_add_json(file.Sheets["Sheet1"], dataToInsert.Sheet1);
+    // reader.writeFile(file, './Docs/sampledoc.xlsx')
     // const convertedData = reader.utils.json_to_sheet(dataToInsert)
     // reader.utils.book_append_sheet(file, convertedData, "Sheet1")
     // reader.writeFile(file, './Docs/sampledoc1.xlsx');
-    res.download(filePath);
+    // res.download(filePath);
 })
 
   

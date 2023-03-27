@@ -23,21 +23,17 @@ file.oninput = () => {
     button[1].style.visibility = 'hidden';
     if(extension === 'xls' || extension === 'xlsx'){
         document.querySelector('.ex').innerText = extension;
-        button[0].style.visibility = 'inherit';
+        getFile(filename, file.files[0]);
     }else{
         document.querySelector('.ex').innerText = 'This file format is not supported';
-        button[0].style.visibility = 'hidden';
     }
     document.querySelector('.size').innerText = filesize;
-    getFile(filename, file.files[0]);
-    console.log('filter', file.files[0]);
 }
 
 let upload = () => {
     if(load >= 100) {
         clearInterval(process);
         progress_indicator.innerHTML = '100%' + ' ' + 'Upload Complete';
-        button[0].classList.remove('active');
         button[1].style.visibility = 'inherit';
     }else{
         load++;
@@ -52,29 +48,13 @@ function getFile(fileName, file) {
         load = 0;
         progress.value = 0;
         progress_indicator.innerText = '';
-        button[0].onclick = e => {
-                e.preventDefault();
-                button[0].classList.add('active');
-                process = setInterval(upload, 10);
-            
+        process = setInterval(upload, 10);
         }
-    }
 }
 
 document.querySelector('#upload').addEventListener('change', event => {
     handleImageUpload(event)
   })
-
-// document.querySelector('#downloadButton').addEventListener('click', () => {
-//     fetch('http://localhost:3000/download', {
-//         method: 'GET',
-//     })
-// .then(data => {
-// // console.log(data)
-// })
-// .catch(error => {
-// console.error(error)
-// })  })
 
   const handleImageUpload = event => {
     const files = event.target.files
